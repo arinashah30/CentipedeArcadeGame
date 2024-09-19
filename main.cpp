@@ -1,4 +1,6 @@
 #include <SFML/Graphics.hpp>
+#include <centipede.hpp>
+#include <mushroom.hpp>
 
 using namespace sf;
 int main()
@@ -33,7 +35,8 @@ int main()
     // Set the position of the sprite to the target rectangle's position
     sprite.setPosition(targetRect.left, targetRect.top);
 
-
+    ECE_Centipede* centipede = createCentipede();
+    generateMushrooms();
 
 
     // Main loop
@@ -46,6 +49,10 @@ int main()
         window.clear(sf::Color::White);
         window.draw(sprite);
         window.display();
+
+        centipede->detectCollision();
+
+
     }
     return 0;
 }

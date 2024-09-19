@@ -10,7 +10,6 @@ using std::endl;
 using namespace sf;
 
 class ECE_Centipede: public sf::Sprite {
-    std::list<sf::Sprite> segments; //list to keep track of segments
 
     public:
 
