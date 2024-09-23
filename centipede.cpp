@@ -3,25 +3,15 @@
 #include <SFML/Window.hpp>
 #include <list>
 #include <iostream>
+#include <centipede.hpp>
+#include <define.hpp>
 
 using std::cerr;
 using std::endl;
 // Make code easier to type with "using namespace"
 using namespace sf;
 
-class ECE_Centipede: public sf::Sprite {
-
-    public:
-
-        ECE_Centipede* prev; //pointer to sprite before
-        ECE_Centipede* next; //pointer to sprite after
-
-        int x;
-        int y;
-
-        sf::Texture texture;
-
-        ECE_Centipede(bool isHead) {
+ECE_Centipede::ECE_Centipede(bool isHead) {
             if (isHead) {
                 if (!texture.loadFromFile("CentipedeHead.png")) {
                     cerr << "could not create centipede head" << endl;
@@ -33,11 +23,10 @@ class ECE_Centipede: public sf::Sprite {
                 }
                 setTexture(texture); 
             }
-        }
+            this->alive = 1;
+}
 
-    
-
-    int calculateSegments() { //class to calculate segments, will redraw texture if new segment and body needs to be changed to head
+int ECE_Centipede::calculateSegments() { //class to calculate segments, will redraw texture if new segment and body needs to be changed to head
         bool newSegment = false;
 
         if (!prev) { //no previous == new head
@@ -53,8 +42,7 @@ class ECE_Centipede: public sf::Sprite {
         }
     }
 
-
-    void detectCollision() {
+void ECE_Centipede::detectCollision() {
         bool collision = false;
 
         if (collision) { //disconnect the segments
@@ -63,10 +51,35 @@ class ECE_Centipede: public sf::Sprite {
             prev = nullptr;
             calculateSegments();
         }
-    }
+}
 
-    
-};
+int ECE_Centipede::detectMushroomCollision() {
+    int mushroomCollision = -1; //0 == left, 1 == right, 2 == down
+    for (ECE_Centipede const& i : segments) {
+
+    }
+    return mushroomCollision;
+}
+
+void ECE_Centipede::updateLocation() {
+    //iterate through segments
+    for (ECE_Centipede const& i : segments) {
+        int mushroomCollision = detectMushroomCollision();
+        switch (mushroomCollision)
+        {
+        case 0:
+            //move down
+            break;
+        case 1:
+            //move down
+            break;
+        case 2:
+            break;
+        default:
+            break;
+        }
+    }
+}
 
 ECE_Centipede* createCentipede() {
     ECE_Centipede* head = new ECE_Centipede(true);
@@ -78,4 +91,9 @@ ECE_Centipede* createCentipede() {
         temp = next;
     }
     return head;
+}
+
+void ECE_Centipede::updateCentipede() {
+    this->updateLocation();
+    this->detectCollision();
 }

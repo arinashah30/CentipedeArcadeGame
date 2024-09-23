@@ -3,20 +3,25 @@
 #include <SFML/Window.hpp>
 #include <list>
 #include <iostream>
+#include <define.hpp>
 
 using std::cerr;
 using std::endl;
 // Make code easier to type with "using namespace"
 using namespace sf;
 
-std::list<sf::Sprite> segments; //list to keep track of segments
+
 
 class ECE_Centipede: public sf::Sprite {
+    private:
+        std::list<ECE_Centipede> segments; //list to keep track of segments
 
     public:
 
         ECE_Centipede* prev; //pointer to sprite before
         ECE_Centipede* next; //pointer to sprite after
+        int direction; //0 == left, 1 == right
+        int alive;
 
         int x;
         int y;
@@ -30,6 +35,12 @@ class ECE_Centipede: public sf::Sprite {
 
 
     void detectCollision();
+
+    void updateLocation();
+
+    void updateCentipede();
+
+    int detectMushroomCollision();
 };
 
 ECE_Centipede* createCentipede();

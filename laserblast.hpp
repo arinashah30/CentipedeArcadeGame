@@ -5,28 +5,27 @@
 #include <iostream>
 #include <define.hpp>
 
-using std::cerr;
-using std::endl;
+#include <list>
+
+using namespace std;
+
+using ::cerr;
+using ::endl;
 // Make code easier to type with "using namespace"
 using namespace sf;
 
-list<Mushroom*> mushrooms(30);
 
-class Mushroom: public sf::Sprite {
-
+class ECE_LaserBlast: public sf::Sprite {
     public:
+
         int x;
         int y;
-        int hitTimes;
 
-        sf::Texture texture;
-
-        Mushroom(int x, int y);
-    
+        ECE_LaserBlast(int x, int y);
 
     void detectCollision();
 
-    void updateMushrooms();
+    void updateLaserBlasts();
 };
 
-bool generateMushrooms();
+list<ECE_LaserBlast*> lasers();

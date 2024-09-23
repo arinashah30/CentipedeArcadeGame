@@ -10,23 +10,22 @@ using std::endl;
 // Make code easier to type with "using namespace"
 using namespace sf;
 
-list<Mushroom*> mushrooms(30);
 
-class Mushroom: public sf::Sprite {
+
+class Spider: public sf::Sprite {
+    private:
+        
 
     public:
+
+        int alive;
+
         int x;
         int y;
-        int hitTimes;
 
         sf::Texture texture;
 
-        Mushroom(int x, int y);
-    
 
-    void detectCollision();
+    void updateLocation();
 
-    void updateMushrooms();
 };
-
-bool generateMushrooms();
